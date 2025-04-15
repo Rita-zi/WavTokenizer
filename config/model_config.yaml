@@ -1,0 +1,39 @@
+# WavTokenizer Model Configuration
+
+model:
+  config_path: "./wavtokenizer_mediumdata_frame75_3s_nq1_code4096_dim512_kmeans200_attn.yaml"
+  model_path: "./wavtokenizer_large_speech_320_24k.ckpt"
+
+data:
+  input_dirs:
+    - "data/raw/box"
+    - "data/raw/plastic"
+    - "data/raw/papercup"
+  clean_dir: "data/clean"  # 乾淨的目標音檔 (原 box2)
+  sampling_rate: 24000
+  batch_size: 4
+  num_workers: 4
+  pin_memory: true
+  prefetch_factor: 2
+
+training:
+  epochs: 2000
+  learning_rate: 3e-2
+  weight_decay: 0.001
+  scheduler:
+    type: "CosineAnnealingWarmRestarts"
+    T_0: 50
+    T_mult: 2
+    eta_min: 1e-7
+  validation:
+    split: 0.2
+    speakers: ["boy7", "girl9"]
+    materials: ["box", "plastic", "papercup"]
+    strategy: "stratified"
+
+output:
+  save_dir: "outputs"
+  enhanced_dir: "outputs/enhanced"
+  tsne_dir: "outputs/tsne"
+  visualization_dir: "outputs/visualization"
+  checkpoint_dir: "checkpoints"
