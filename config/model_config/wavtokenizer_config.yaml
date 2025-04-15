@@ -1,0 +1,31 @@
+# Model configurations
+model:
+  config_path: "./wavtokenizer_mediumdata_frame75_3s_nq1_code4096_dim512_kmeans200_attn.yaml"
+  model_path: "./wavtokenizer_large_speech_320_24k.ckpt"
+  feature_scale: 1.5
+  tsne_weight: 0.2
+
+training:
+  epochs: 2000
+  batch_size: 4
+  learning_rate: 3e-2
+  weight_decay: 0.001
+  scheduler_patience: 5
+  scheduler_factor: 0.7
+  grad_clip: 0.5
+  min_lr: 1e-6
+
+data:
+  input_dirs:
+    - "./data/raw/box"
+    - "./data/raw/plastic"
+    - "./data/raw/papercup"
+  val_split: 0.2
+  val_speakers: ["boy7", "girl9"]
+  val_materials: ["box", "plastic", "papercup"]
+  validation_strategy: "stratified"
+  
+output:
+  save_dir: "./outputs/enhanced"
+  feature_dir: "./outputs/tsne"
+  visualization_dir: "./outputs/visualization"
