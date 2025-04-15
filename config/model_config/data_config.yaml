@@ -1,0 +1,26 @@
+# Data Configuration
+
+# Input audio directories (different materials)
+input_dirs:
+  - "./box"       # Box material recordings
+  - "./plastic"   # Plastic material recordings
+  - "./papercup"  # Paper cup material recordings
+
+# Target clean audio directory
+target_dir: "./box2"  # Clean reference audio files
+
+# Data Processing
+sampling_rate: 24000
+batch_size: 4
+validation_split: 0.2
+
+# Validation Set Configuration
+validation:
+  speakers:
+    - "boy7"
+    - "girl9"
+  materials:
+    - "box"
+    - "plastic"
+    - "papercup"
+  strategy: "stratified"  # Options: speaker_only, stratified, random
