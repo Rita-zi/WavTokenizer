@@ -1,0 +1,14 @@
+model:
+  config_path: "./wavtokenizer_mediumdata_frame75_3s_nq1_code4096_dim512_kmeans200_attn.yaml"
+  model_path: "./wavtokenizer_large_speech_320_24k.ckpt"
+
+data:
+  input_dirs: 
+    - "./box"
+    - "./plastic"
+    - "./papercup"
+  batch_size: 16
+
+output:
+  save_dir: "./features_output"
+  save_format: "pt"  # pt or npy
